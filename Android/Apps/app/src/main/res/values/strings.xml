@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MiniPi</string>
+
+    <string name="str_bienvenida">Primera App</string>
+    <string name="str_usuario">Usuario</string>
+    <string name="str_hint_usuario">Ingrese su nombre</string>
+    <string name="str_password">Contraseña</string>
+    <string name="str_hint_password">Ingrese su contraseña</string>
+    <string name="str_enter">Ingresar</string>
+    <string name="str_msj_enter">Login exitoso</string>
+
+    <string name="str_saludo_usuario">Hola:</string>
+</resources>
