@@ -10,4 +10,7 @@
     <string name="str_msj_enter">Login exitoso</string>
 
     <string name="str_saludo_usuario">Hola:</string>
+    <string name="str_boton_color">C</string>
+    <string name="str_boton_incrementar">+</string>
+    <string name="str_boton_decrementar">-</string>
 </resources>
