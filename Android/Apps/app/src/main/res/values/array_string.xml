@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- String spinner Configuracion -->
+    <string-array name="datos_array">
+        <item>Peso</item>
+        <item>Raza</item>
+        <item>Color</item>
+        <item>Edad</item>
+    </string-array>
+</resources>

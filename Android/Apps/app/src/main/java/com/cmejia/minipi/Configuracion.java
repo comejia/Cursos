@@ -4,8 +4,10 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -17,9 +19,12 @@ public class Configuracion extends AppCompatActivity {
     public Button botonIncrementar;
     public Button botonDecrementar;
 
-    //public Spinner menu;
+    public Spinner spinnerData;
 
     public String bufDatoUsuario;
+
+
+    public EditText debug;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,7 @@ public class Configuracion extends AppCompatActivity {
         botonColor = (Button)findViewById(R.id.boton_color);
         botonIncrementar = (Button)findViewById(R.id.boton_incrementar);
         botonDecrementar = (Button)findViewById(R.id.boton_decrementar);
+        spinnerData = (Spinner)findViewById(R.id.spinner_data);
 
         textoHola.setText(R.string.str_saludo_usuario);
         bufDatoUsuario = getIntent().getStringExtra("USUARIO");
@@ -63,12 +69,30 @@ public class Configuracion extends AppCompatActivity {
             }
         });
 
-        // 30/08
-        //menu = (Spinner)findViewById(R.id.spinner_menu);
 
-        //final String[] itemsMenu = {"Cesar", Mejia};
+        debug = (EditText)findViewById(R.id.debug);
 
-        //ArrayAdapter <String> adaptador = new ArrayAdapter<String>(this,android);
+
+        // Creacion del adaptador con los strings desde el xml
+        ArrayAdapter <CharSequence> adaptador =
+                ArrayAdapter.createFromResource(this, R.array.datos_array, android.R.layout.simple_spinner_item);
+
+        adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // define como muestra los items
+
+        spinnerData.setAdapter(adaptador); // setea el adaptador al spinner
+
+        spinnerData.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                debug.setText("Seleccionado " + parent.getItemAtPosition(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                debug.setText("");
+            }
+        });
+
 
         // usar listening
         //adaptador = setD
