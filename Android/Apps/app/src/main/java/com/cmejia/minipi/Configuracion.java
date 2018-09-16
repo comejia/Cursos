@@ -24,7 +24,7 @@ public class Configuracion extends AppCompatActivity {
     public String bufDatoUsuario;
 
 
-    public EditText debug;
+    public TextView debug;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,7 @@ public class Configuracion extends AppCompatActivity {
         });
 
 
-        debug = (EditText)findViewById(R.id.debug);
+        debug = (TextView)findViewById(R.id.debug);
 
 
         // Creacion del adaptador con los strings desde el xml
