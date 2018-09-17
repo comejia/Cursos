@@ -51,7 +51,8 @@ public class Login extends AppCompatActivity {
                 bufNombreUsuario = nombreUsuario.getText().toString(); // hay que convertir porque getText devuelve un array de char
 
                 // Instancia un intent para pasar a otra activity
-                Intent actConfig = new Intent(Login.this, Configuracion.class);
+                //Intent actConfig = new Intent(Login.this, Configuracion.class);
+                Intent actConfig = new Intent(Login.this, InfoList.class);
 
                 actConfig.putExtra("USUARIO", bufNombreUsuario); // envio datos a la otra activity con Intent
 
