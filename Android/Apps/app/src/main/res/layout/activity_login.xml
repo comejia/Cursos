@@ -11,13 +11,15 @@
     <TextView
         android:id="@+id/texto_bienvenida"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/str_bienvenida" />
 
     <TextView
         android:id="@+id/texto_usuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/texto_bienvenida" />
+        android:layout_below="@id/texto_bienvenida"
+        android:text="@string/str_usuario" />
 
     <EditText
         android:id="@+id/nombre_usuario"
@@ -25,13 +27,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/texto_usuario"
         android:ems="10"
+        android:hint="@string/str_hint_usuario"
         android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/texto_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/nombre_usuario" />
+        android:layout_below="@id/nombre_usuario"
+        android:text="@string/str_password" />
 
     <EditText
         android:id="@+id/pass_usuario"
@@ -39,14 +43,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/texto_password"
         android:ems="10"
+        android:hint="@string/str_hint_password"
         android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/boton_enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_below="@id/pass_usuario"
-        android:layout_alignParentEnd="true"/>
+        android:text="@string/str_enter" />
 
     <TextView
         android:id="@+id/texto_ingreso"

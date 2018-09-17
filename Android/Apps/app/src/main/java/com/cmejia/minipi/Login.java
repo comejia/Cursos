@@ -34,12 +34,12 @@ public class Login extends AppCompatActivity {
         botonEnter = (Button)findViewById(R.id.boton_enter);
         textoIngreso = (TextView)findViewById(R.id.texto_ingreso);
 
-        textoBienvenida.setText(R.string.str_bienvenida);
-        textoUsuario.setText(R.string.str_usuario);
-        nombreUsuario.setHint(R.string.str_hint_usuario);
-        textoPassword.setText(R.string.str_password);
-        passUsuario.setHint(R.string.str_hint_password);
-        botonEnter.setText(R.string.str_enter);
+//        textoBienvenida.setText(R.string.str_bienvenida);
+//        textoUsuario.setText(R.string.str_usuario);
+//        nombreUsuario.setHint(R.string.str_hint_usuario);
+//        textoPassword.setText(R.string.str_password);
+//        passUsuario.setHint(R.string.str_hint_password);
+//        botonEnter.setText(R.string.str_enter);
 
         botonEnter.setOnClickListener(new View.OnClickListener() {
             @Override
