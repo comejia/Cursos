@@ -1,6 +1,6 @@
-package com.cmejia.minipi;
+package clases;
 
-import android.graphics.drawable.Drawable;
+//import android.graphics.drawable.Drawable;
 
 public class Mascotas {
     private String name;

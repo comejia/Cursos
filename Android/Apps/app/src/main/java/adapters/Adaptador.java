@@ -1,4 +1,4 @@
-package com.cmejia.minipi;
+package adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import clases.Mascotas;
+import com.cmejia.minipi.R;
 
 
 public class Adaptador extends ArrayAdapter<Mascotas> {

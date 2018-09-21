@@ -9,7 +9,7 @@ import android.view.Window;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Splash extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
     private final long splash_screen_delay = 3000;  // tiempo que el splash screen se muestra [ms]
 
@@ -27,7 +27,7 @@ public class Splash extends AppCompatActivity {
             @Override
             public void run() {
                 // Seteo la activity que se va a mostrar despues del splash screen
-                Intent logIntent =  new Intent(Splash.this, Login.class);
+                Intent logIntent =  new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(logIntent);
 
                 finish(); // Destruyo la activity para que no se vuelva a mostrar al tocar el boton back
