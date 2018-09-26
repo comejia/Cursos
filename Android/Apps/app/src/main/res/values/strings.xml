@@ -1,12 +1,16 @@
 <resources>
     <string name="app_name">MiniPi</string>
+
+
     <!-- Activity LoginActivity -->
-    <string name="str_app_name">MiniPi</string>
-    <string name="str_user">Usuario</string>
-    <string name="str_hint_user">Ingrese su nombre</string>
-    <string name="str_pass">Contraseña</string>
-    <string name="str_hint_pass">Ingrese su contraseña</string>
+    <string name="str_tittle">Biblioteca UTN Electronica</string>
+    <string name="str_hint_user">Usuario</string>
+    <string name="str_hint_pass">Contraseña</string>
     <string name="str_login">Ingresar</string>
+    <string name="str_sign_up">Registrarse</string>
+    <!-- Activity LoginActivity -->
+    <string name="str_hint_email">Email</string>
+    <string name="str_register">Registrar</string>
 
     <!-- Activity Usuario -->
     <string name="str_saludo_usuario">Hola:</string>

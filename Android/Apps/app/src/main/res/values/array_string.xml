@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- String spinner Configuracion -->
+    <!-- String array spinner DetailsActivity -->
     <string-array name="datos_array">
-        <item>Peso</item>
-        <item>Raza</item>
-        <item>Color</item>
-        <item>Edad</item>
+        <item>Descargar</item>
+        <item>Reportar</item>
     </string-array>
 </resources>

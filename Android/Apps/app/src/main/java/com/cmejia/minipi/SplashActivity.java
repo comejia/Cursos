@@ -27,8 +27,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Seteo la activity que se va a mostrar despues del splash screen
-                Intent logIntent =  new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(logIntent);
+                Intent nextActLogin =  new Intent(SplashActivity.this, LoginActivity.class);
+                startActivity(nextActLogin);
 
                 finish(); // Destruyo la activity para que no se vuelva a mostrar al tocar el boton back
             }

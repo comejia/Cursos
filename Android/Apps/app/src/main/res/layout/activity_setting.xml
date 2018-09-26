@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    tools:context=".Configuracion">
+    tools:context=".SettingActivity">
 
     <TextView
         android:id="@+id/texto_hola"
@@ -42,21 +42,5 @@
         android:layout_below="@id/boton_color"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"/>
-
-    <Spinner
-        android:id="@+id/spinner_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/boton_decrementar"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="30dp" />
-
-    <TextView
-        android:id="@+id/debug"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/spinner_data"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="20dp" />
 
 </RelativeLayout>

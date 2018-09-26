@@ -10,14 +10,14 @@ import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public TextView appName;
-    public TextView userText;
+    public TextView tittle;
     public EditText userName;
-    public TextView passText;
     public EditText userPass;
-    public Button loginBtn;
+    public Button loginButton;
+    public TextView textSignUp;
 
-    public String userNameBuffer;
+    public int userNameSize;
+    public int userPassSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,33 +25,43 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //textoBienvenida.findViewById(R.id.texto_bienvenida); NO UTILIZAR, crashea la app
-        appName = (TextView)findViewById(R.id.app_name);
-        userText = (TextView)findViewById(R.id.user_text);
-        userName = (EditText)findViewById(R.id.user_name);
-        passText = (TextView)findViewById(R.id.pass_text);
-        userPass = (EditText)findViewById(R.id.user_pass);
-        loginBtn = (Button)findViewById(R.id.login_btn);
+        tittle = findViewById(R.id.tittle);
+        userName = findViewById(R.id.user_name);
+        userPass = findViewById(R.id.user_pass);
+        loginButton = findViewById(R.id.login_btn);
+        textSignUp = findViewById(R.id.sign_up);
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //NOTA: si no hay nada en el getText se crashea el programa. Se debe hacer una VERIFICACION
-                userNameBuffer = userName.getText().toString(); // hay que convertir porque getText devuelve un array de char
-
-                // Instancia un intent para pasar a otra activity
-                //Intent actConfig = new Intent(LoginActivity.this, Configuracion.class);
-                Intent actConfig = new Intent(LoginActivity.this, InfoList.class);
-
-                actConfig.putExtra("USUARIO", userNameBuffer); // envio datos a la otra activity con Intent
-
-                //bufTextUser = Text_pass.getText().toString();
-                //int1.putExtra("PASS",bufTextUser);
-
-                startActivity(actConfig); // Inicio la otra activity
-
+                userNameSize = userName.getText().length();
+                userPassSize = userPass.getText().length();
+                if( userNameSize != 0 && userPassSize != 0 ) {
+                    // Instancia un intent para pasar a otra activity
+                    Intent nextActInfoList = new Intent(LoginActivity.this, InfoListActivity.class);
+                    //dataBuffer = userName.getText().toString(); // hay que convertir porque getText devuelve un array de char
+                    startActivity(nextActInfoList); // Inicio la otra activity
+                }
+                else {
+                    if( userNameSize == 0 ) {
+                        userName.setHint("Ingrese su usuario");
+                        userName.setHintTextColor(getResources().getColor(R.color.colorCompleteInputLogin));
+                    }
+                    if( userPassSize == 0) {
+                        userPass.setHint("Ingrese su contraseña");
+                        userPass.setHintTextColor(getResources().getColor(R.color.colorCompleteInputLogin));
+                    }
+                }
             }
         });
 
+        textSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nextActSignUp = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(nextActSignUp);
+            }
+        });
     }
 }
