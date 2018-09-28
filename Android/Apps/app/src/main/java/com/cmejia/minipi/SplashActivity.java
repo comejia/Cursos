@@ -5,14 +5,17 @@ import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.ProgressBar;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class SplashActivity extends AppCompatActivity {
 
+    public ProgressBar progressBar;
     private final long splash_screen_delay = 3000;  // tiempo que el splash screen se muestra [ms]
 
+    int progress = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +24,8 @@ public class SplashActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_splash);
+
+        progressBar = findViewById(R.id.progressBar);
 
         // Se crea la tarea a ejecutar
         TimerTask task = new TimerTask() {
@@ -37,5 +42,6 @@ public class SplashActivity extends AppCompatActivity {
         // Creo un timer y agrego la tarea al scheduler
         Timer timer = new Timer();
         timer.schedule(task, splash_screen_delay);
+
     }
 }

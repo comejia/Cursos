@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent nextActInfoList = new Intent(LoginActivity.this, InfoListActivity.class);
                     //dataBuffer = userName.getText().toString(); // hay que convertir porque getText devuelve un array de char
                     startActivity(nextActInfoList); // Inicio la otra activity
+                    finish();
                 }
                 else {
                     if( userNameSize == 0 ) {
@@ -60,6 +61,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent nextActSignUp = new Intent(LoginActivity.this, SignUpActivity.class);
+                userName.setText("");
+                userPass.setText("");
                 startActivity(nextActSignUp);
             }
         });
