@@ -26,6 +26,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         progressBar = findViewById(R.id.progressBar);
+        //CARGAR BBDD
 
         // Se crea la tarea a ejecutar
         TimerTask task = new TimerTask() {

@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <!-- Activity LoginActivity -->
+    <!-- Activity Login -->
     <color name="colorPrimaryLogin">#F5F5F5</color>
 
     <color name="colorBackActLogin">#212121</color>
@@ -16,8 +16,11 @@
     
     <color name="colorCompleteInputLogin">#F44336</color>
 
-    <!-- Activity SignUpActivity -->
+    <!-- Activity SignUp -->
     <color name="colorBackActSignUp">#212121</color>
     <color name="colorBackBtnSignUp">#FF4081</color>
+
+    <!-- Activity Setting -->
+    <color name="colorBackActSetting">#000000</color>
 
 </resources>

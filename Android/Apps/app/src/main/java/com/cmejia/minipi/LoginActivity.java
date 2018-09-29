@@ -1,6 +1,8 @@
 package com.cmejia.minipi;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +33,9 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login_btn);
         textSignUp = findViewById(R.id.sign_up);
 
+        // Crea el archivo de preferencias "UserPreferences" si no existe
+        final SharedPreferences preferences = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +46,11 @@ public class LoginActivity extends AppCompatActivity {
                     // Instancia un intent para pasar a otra activity
                     Intent nextActInfoList = new Intent(LoginActivity.this, InfoListActivity.class);
                     //dataBuffer = userName.getText().toString(); // hay que convertir porque getText devuelve un array de char
+
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("user", userName.getText().toString());
+                    editor.commit();
+
                     startActivity(nextActInfoList); // Inicio la otra activity
                     finish();
                 }
@@ -61,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent nextActSignUp = new Intent(LoginActivity.this, SignUpActivity.class);
+                // Clear a los campos EditText user y pass
                 userName.setText("");
                 userPass.setText("");
                 startActivity(nextActSignUp);
