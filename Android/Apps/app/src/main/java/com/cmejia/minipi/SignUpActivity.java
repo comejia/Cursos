@@ -42,7 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
                 stringLenUserEmail = userEmail.getText().length();
 
                 if( stringLenUserName != 0 && stringLenUserPass != 0 && stringLenUserEmail != 0) {
-                    // guardar en BBDD
+                    // guardar en BBDD y checkear
                     finish();
                 }
                 else {

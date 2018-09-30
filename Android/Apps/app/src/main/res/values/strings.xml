@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">MiniPi</string>
-
-
+    
     <!-- Activity Login -->
     <string name="str_tittle">Biblioteca UTN Electronica</string>
     <string name="str_hint_user">Usuario</string>
@@ -13,9 +12,15 @@
     <string name="str_hint_email">Email</string>
     <string name="str_register">Registrar</string>
 
-    <!-- Activity  Setting-->
+    <!-- Activity  Settings -->
     <string name="str_saludo_usuario">Hola:</string>
     <string name="str_boton_color">C</string>
     <string name="str_boton_incrementar">+</string>
     <string name="str_boton_decrementar">-</string>
+    
+    <!-- Fragment Settings -->
+    <string name="pref_sound">Habilitar sonido</string>
+    <string name="pref_edit">Editar Items</string>
+    <string name="pref_language">Idioma</string>
+
 </resources>
