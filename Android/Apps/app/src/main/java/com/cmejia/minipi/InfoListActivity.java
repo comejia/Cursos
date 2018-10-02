@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
+
 
 import adapters.ListViewAdapter;
 import clases.Library;
@@ -19,7 +22,7 @@ public class InfoListActivity extends AppCompatActivity {
     public ListView myListView;
     public TextView welcomeMsg;
 
-    public ImageView settingsImg;
+    public Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,9 @@ public class InfoListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info_list);
 
         myListView = findViewById(R.id.info_list);
-        settingsImg = findViewById(R.id.settings_img);
+        toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar); // Indica que toolbar va a ser la ActionBar de la activity
 
         // Instancio los objetos que se van a mostrar
         Library[] info = new Library[] {
@@ -52,21 +57,38 @@ public class InfoListActivity extends AppCompatActivity {
             }
         });
 
-        settingsImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent nextActSettings = new Intent(InfoListActivity.this, SettingsActivity.class);
-                startActivity(nextActSettings);
-            }
-        });
-
-        // Prueba SharedPreferences
+        // TESTING SharedPreferences
         welcomeMsg = findViewById(R.id.welcome_msg);
         SharedPreferences preferences = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         String user = preferences.getString("user","nombre");
         if(!user.equals("nombre")) {
             String buffer = "Bienvenido: " + user;
             welcomeMsg.setText(buffer);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                // agregar activity de Anadir item
+                return true;
+            case R.id.action_settings:
+                Intent nextActSettings = new Intent(InfoListActivity.this, SettingsActivity.class);
+                startActivity(nextActSettings);
+                return true;
+            case R.id.action_search:
+                // implementar una busqueda
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
         }
     }
 }

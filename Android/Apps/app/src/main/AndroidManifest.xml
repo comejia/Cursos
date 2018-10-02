@@ -10,7 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LoginActivity" />
-        <activity android:name=".SettingsActivity" />
+        <activity android:name=".SettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MANAGE_NETWORK_USAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".SplashActivity">
             <intent-filter> <!-- Se cambia el intent-filter al SplashActivity para que inicie desde aca -->
                 <action android:name="android.intent.action.MAIN" />

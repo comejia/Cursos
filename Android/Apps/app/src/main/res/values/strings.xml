@@ -12,13 +12,18 @@
     <string name="str_hint_email">Email</string>
     <string name="str_register">Registrar</string>
 
+    <!-- Activity InfoList -->
+    <string name="settings_desc_img">Configuracion de la app</string>
+
+    <!-- Toolbar menu -->
+    <string name="action_settings">Configuracion</string>
+    <string name="action_add">Añadir</string>
+    <string name="action_search">Buscar</string>
+    <string name="action_log_out">Salir</string>
+
     <!-- Activity  Settings -->
-    <string name="str_saludo_usuario">Hola:</string>
-    <string name="str_boton_color">C</string>
-    <string name="str_boton_incrementar">+</string>
-    <string name="str_boton_decrementar">-</string>
-    
     <!-- Fragment Settings -->
+    <string name="pref_name">Configuracion</string>
     <string name="pref_sound">Habilitar sonido</string>
     <string name="pref_edit">Editar Items</string>
     <string name="pref_language">Idioma</string>
