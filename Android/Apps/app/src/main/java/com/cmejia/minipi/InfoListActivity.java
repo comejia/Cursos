@@ -68,13 +68,13 @@ public class InfoListActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) { // Genera el menu que se ve en la Toolbar
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) { //Metodo para realizar una accion al tocar algun icono
         switch (item.getItemId()) {
             case R.id.action_add:
                 // agregar activity de Anadir item
@@ -86,9 +86,14 @@ public class InfoListActivity extends AppCompatActivity {
             case R.id.action_search:
                 // implementar una busqueda
                 return true;
+            case R.id.action_log_out:
+                Intent nextActLogin = new Intent(InfoListActivity.this, LoginActivity.class);
+                startActivity(nextActLogin);
+                finish();
+                break;
             default:
-                return super.onOptionsItemSelected(item);
-
+                break;
         }
+        return super.onOptionsItemSelected(item);
     }
 }

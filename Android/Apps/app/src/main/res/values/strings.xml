@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">MiniPi</string>
-    
+
+    <!-- Activity Splash -->
+    <string name="str_logo_desc">Logo UTN</string>
+
     <!-- Activity Login -->
     <string name="str_tittle">Biblioteca UTN Electronica</string>
     <string name="str_hint_user">Usuario</string>
@@ -23,9 +26,16 @@
 
     <!-- Activity  Settings -->
     <!-- Fragment Settings -->
-    <string name="pref_name">Configuracion</string>
-    <string name="pref_sound">Habilitar sonido</string>
+    <string name="pref_config_simple">Configuracion de estilo</string>
+    <string name="pref_config_advance">Configuracion avanzada</string>
+
+    <string name="pref_sound">Encender sonido</string>
     <string name="pref_edit">Editar Items</string>
+
     <string name="pref_language">Idioma</string>
+    <string name="pref_background">Color de fondo</string>
+    <string name="pref_text_style">Tipo de fuente</string>
+    <string name="pref_text_color">Color de texto</string>
+    <string name="pref_text_size">Tamaño de texto</string>
 
 </resources>

@@ -17,4 +17,40 @@
         <item>ING</item>
         <item>ITA</item>
     </string-array>
+
+    <string-array name="back_color_entries">
+        <item>Negro</item>
+        <item>Blanco</item>
+        <item>Rojo</item>
+    </string-array>
+    <string-array name="back_color_values">
+        <item>NEG</item>
+        <item>BLA</item>
+        <item>ROJ</item>
+    </string-array>
+
+    <string-array name="text_style_entries">
+        <item>Cursiva</item>
+        <item>Normal</item>
+        <item>Negrita</item>
+    </string-array>
+    <string-array name="text_style_values">
+        <item>CUR</item>
+        <item>NOR</item>
+        <item>NE</item>
+    </string-array>
+
+    <string-array name="text_color_entries">
+        <item>Negro</item>
+        <item>Blanco</item>
+        <item>Rojo</item>
+        <item>Amarillo</item>
+    </string-array>
+    <string-array name="text_color_values">
+        <item>NEG</item>
+        <item>BLA</item>
+        <item>ROJ</item>
+        <item>AMA</item>
+    </string-array>
+
 </resources>
