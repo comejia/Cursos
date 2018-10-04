@@ -1,5 +1,6 @@
 package com.cmejia.minipi;
 
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     public TextView info;
     public Spinner options;
+    public TabLayout tabs;
 
     public TextView debug;
 
@@ -24,6 +26,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         info = findViewById(R.id.info);
         options = findViewById(R.id.options);
+        tabs = findViewById(R.id.tabs);
 
         debug = findViewById(R.id.debug);
 
@@ -51,5 +54,12 @@ public class DetailsActivity extends AppCompatActivity {
                 debug.setText("");
             }
         });
+
+        tabs.addTab(tabs.newTab().setText("TAB 1"));
+        tabs.addTab(tabs.newTab().setText("TAB 2"));
+        tabs.addTab(tabs.newTab().setText("TAB 3"));
+        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
+        tabs.setTabGravity(TabLayout.GRAVITY_CENTER);
+
     }
 }

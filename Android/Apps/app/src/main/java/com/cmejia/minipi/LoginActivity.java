@@ -65,8 +65,10 @@ public class LoginActivity extends AppCompatActivity {
 
                             SharedPreferences.Editor editor = preferences.edit();
                             editor.putString("user", userName.getText().toString());
-                            editor.commit();
+                            editor.apply();
 
+                            c.close();
+                            db.close();
                             startActivity(nextActInfoList); // Inicio la otra activity
                             finish();
                         }
