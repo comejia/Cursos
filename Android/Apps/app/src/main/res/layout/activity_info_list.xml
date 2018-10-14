@@ -53,8 +53,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:logo="@drawable/ic_action_search"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
 </android.support.constraint.ConstraintLayout>
+
+    <!--app:logo="@drawable/ic_action_search" -->

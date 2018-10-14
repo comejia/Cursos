@@ -9,18 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import clases.UserSQLite;
+import clases.BookSQLite;
 
 public class SplashActivity extends AppCompatActivity {
 
     public ProgressBar progressBar;
     private final long splash_screen_delay = 3000;  // tiempo que el splash screen se muestra [ms]
 
+    public SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +33,34 @@ public class SplashActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar);
 
+        final BookSQLite bookdb = new BookSQLite(this, "DBBook.db", null, 1);
+        db = bookdb.getWritableDatabase(); // Referencia a userdb para modificacion
 
-        //Nos aseguramos de que existe al menos un registro
-            //if (c.moveToFirst()) {
-                //Recorremos el cursor hasta que no haya más registros
-                //do {
-                 //   String codigo= c.getString(0);
-                //    String nombre = c.getString(1);
+        Cursor c = db.query("BookTable", null, null,
+                null,null, null, null);
 
-              //  } while(c.moveToNext());
-            //}
-            //else {
+        if(!c.moveToFirst()) { // Si no existe ningun registro, entonces cargar la base de datos
+            ContentValues register = new ContentValues();
+            register.put("bookName", "Electromagnetismo");
+            register.put("subject", "Medios de enlace");
+            register.put("details", "Libro con los fundamentos de Electromagnetismo");
+            db.insert("BookTable", null, register); // inserta un registro
+
+            register.put("bookName", "Ing de Control Moderno");
+            register.put("subject", "Sistemas de Control");
+            register.put("details", "Enfoque principal en compensacion de sistemas");
+            db.insert("BookTable", null, register); // inserta un registro
+
+            register.put("bookName", "SGOliver");
+            register.put("subject", "Dispositivos moviles");
+            register.put("details", "Enlace con informacion basada en la cursada");
+            db.insert("BookTable", null, register); // inserta un registro
+
+            c.close();
+            db.close(); // Cierra la base de datos
+        }
+
+        //else {
             //}
             //String selection = "username" + " LIKE ?";
             // Specify arguments in placeholder order.

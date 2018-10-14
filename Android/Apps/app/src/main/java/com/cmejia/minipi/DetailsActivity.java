@@ -1,6 +1,7 @@
 package com.cmejia.minipi;
 
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import adapters.ViewPagerAdapter;
+import fragments.Tab1Fragment;
+import fragments.Tab2Fragment;
+
 public class DetailsActivity extends AppCompatActivity {
 
     public TextView info;
     public Spinner options;
+
+    public ViewPager viewPager;
     public TabLayout tabs;
 
     public TextView debug;
@@ -26,6 +33,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         info = findViewById(R.id.info);
         options = findViewById(R.id.options);
+        viewPager = findViewById(R.id.detail_pager);
         tabs = findViewById(R.id.tabs);
 
         debug = findViewById(R.id.debug);
@@ -55,11 +63,27 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
-        tabs.addTab(tabs.newTab().setText("TAB 1"));
-        tabs.addTab(tabs.newTab().setText("TAB 2"));
-        tabs.addTab(tabs.newTab().setText("TAB 3"));
-        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
-        tabs.setTabGravity(TabLayout.GRAVITY_CENTER);
+        // AGREGADO DE FRAGMENTS Y TABS
+        setupViewPager(viewPager);
+        tabs.setupWithViewPager(viewPager); // Comunica los tabs con los fragments
+        //tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
+        //tabs.setTabGravity(TabLayout.GRAVITY_FILL);
+
 
     }
+
+    // Metodo para agregar fragments al ViewPager
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        // getChildFragmentManager() usar esto cuando se tiene un fragment dentro de otro fragment
+        // getSupportFragmentManager() usar esto cuando tengo un fragment dentro de una activity
+
+        adapter.addFragment(new Tab1Fragment(), "MENU 1");
+        adapter.addFragment(new Tab2Fragment(), "MENU 2");
+        //adapter.addFragment(new User_Credential_Fragment(), "Credencial");
+
+        viewPager.setAdapter(adapter);
+    }
+
 }
+

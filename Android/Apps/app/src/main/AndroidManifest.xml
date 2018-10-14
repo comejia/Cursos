@@ -13,18 +13,21 @@
         <activity android:name=".SettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MANAGE_NETWORK_USAGE" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".SplashActivity">
             <intent-filter> <!-- Se cambia el intent-filter al SplashActivity para que inicie desde aca -->
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".InfoListActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".DetailsActivity" />
+        <activity android:name=".EditActivity"></activity>
     </application>
 
 </manifest>

@@ -5,13 +5,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import clases.CompleteDialog;
 import clases.UserSQLite;
 
 public class LoginActivity extends AppCompatActivity {
@@ -53,49 +60,54 @@ public class LoginActivity extends AppCompatActivity {
                     String pass = userPass.getText().toString();
 
                     String[] col = new String[] {"username", "pass"};
-                    String[] args = new String[] {user};
-                    Cursor c = db.query("UserDataTable", col, "username=?",
+                    String[] args = new String[] {user, pass};
+                    Cursor c = db.query("UserDataTable", null, "username=? AND pass=?",
                             args,null, null, null);
 
-                    if(c.moveToFirst()) { // Si existe algun registro, existe el usuario
-                        String password = c.getString(1);
-                        if(pass.equals(password)) { // usuario y contraseña correctos!
-                            // Instancia un intent para pasar a otra activity
-                            Intent nextActInfoList = new Intent(LoginActivity.this, InfoListActivity.class);
+                    if(c.moveToFirst()) { // Si existe algun registro, user y pass correctos
+                        // Instancia un intent para pasar a otra activity
+                        Intent nextActInfoList = new Intent(LoginActivity.this, InfoListActivity.class);
 
-                            SharedPreferences.Editor editor = preferences.edit();
-                            editor.putString("user", userName.getText().toString());
-                            editor.apply();
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("user", userName.getText().toString());
+                        editor.apply();
 
-                            c.close();
-                            db.close();
-                            startActivity(nextActInfoList); // Inicio la otra activity
-                            finish();
-                        }
-                        else { // Contraseña incorrecta
-                            // Mostrar dialog con error "El contraseña incorrecta"
-                            userPass.setText("");
-                        }
+                        c.close();
+                        db.close();
+                        startActivity(nextActInfoList); // Inicio la otra activity
+                        finish();
                     }
-                    else { // El usuario no existe
-                        // MOSTRAR DIALO
+                    else { // Usuario o contraseña incorrectos
+                        // Toast default
+                        //Toast toast = Toast.makeText(getApplicationContext(), R.string.toast_error, Toast.LENGTH_SHORT);
+                        //toast.setGravity(Gravity.CENTER,0,-50 );
+                        //toast.show();
+
+                        // Toast personalizado
+                        Toast toast = new Toast(getApplicationContext());
+                        LayoutInflater inflater = getLayoutInflater();
+                        View view = inflater.inflate(R.layout.toast, (ViewGroup) findViewById(R.id.toast_layout));
+                        toast.setGravity(Gravity.BOTTOM,0,50);
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        TextView text = view.findViewById(R.id.toast_text);
+                        text.setText(R.string.toast_complete);
+                        toast.setView(view);
+                        toast.show();
+
                         userName.setText("");
+                        userPass.setText("");
                     }
                 }
                 else { // Falta completar campos
-                    // UTILZAR UN DIALOG PARA MOSTRAR ERROR: complete todos los campos
-                    if( userNameSize == 0 ) {
-                        userName.setHint("Ingrese su usuario");
-                        userName.setHintTextColor(getResources().getColor(R.color.colorCompleteInputLogin));
-                    }
-                    if( userPassSize == 0) {
-                        userPass.setHint("Ingrese su contraseña");
-                        userPass.setHintTextColor(getResources().getColor(R.color.colorCompleteInputLogin));
-                    }
+                    // ************** Dialog **************************
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    CompleteDialog dialog = new CompleteDialog();
+                    dialog.show(fragmentManager, "complete");
                 }
             }
         });
 
+        // Inicia la activity SignUp
         textSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
