@@ -43,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
 
         // Crea el archivo de preferencias "UserPreferences" si no existe
         final SharedPreferences preferences = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        userName.setText(preferences.getString("user","not user"));
+        userPass.setText(preferences.getString("pass", "not pass"));
 
         final UserSQLite userdb = new UserSQLite(this, "DBUsers.db", null, 1);
         final SQLiteDatabase db = userdb.getWritableDatabase(); // Referencia a userdb para modificacion
@@ -70,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("user", userName.getText().toString());
+                        editor.putString("pass",userPass.getText().toString());
                         editor.apply();
 
                         c.close();

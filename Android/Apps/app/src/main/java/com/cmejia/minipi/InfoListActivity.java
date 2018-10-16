@@ -1,5 +1,6 @@
 package com.cmejia.minipi;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,17 +30,16 @@ public class InfoListActivity extends AppCompatActivity {
 
     public ListView myListView;
     public TextView welcomeMsg;
-
     public Toolbar toolbar;
 
     public SQLiteDatabase db;
     public ListViewAdapter adapter;
 
     public List<Library> info;
+    public int positionID;
+    public boolean itemEditFlag = false;
+    public String changedBookID;
 
-    public String removeRegister;
-    public Library editItem;
-    int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +99,7 @@ public class InfoListActivity extends AppCompatActivity {
         welcomeMsg = findViewById(R.id.welcome_msg);
         SharedPreferences preferences = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         String user = preferences.getString("user","nombre");
-        if(!user.equals("nombre")) {
+        if( !user.equals("nombre") ) {
             String buffer = "Bienvenido: " + user;
             welcomeMsg.setText(buffer);
         }
@@ -115,50 +115,47 @@ public class InfoListActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        welcomeMsg.setText("PAUSADOO");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        // Actualizar base de datos con los registros eliminados
-        welcomeMsg.setText("STOPPPPP");
-
-
-    }
-
-    @Override
     protected void onRestart() {
         super.onRestart();
-       /* Library edit;
-        // Actualizar base de datos con los registros editados
-        String print = this.getIntent().getStringExtra("VERDATOS");
 
-        if (print == null)
-            welcomeMsg.setText("VAIO");
-        else {
-            edit = info.get(pos);
-            edit.setBookName(print);
-            info.set(pos, edit);
-            adapter.notifyDataSetChanged();
-            welcomeMsg.setText("CAMBIOS");
-        }*/
+        if(itemEditFlag) {
+            int cantChange = 0;
 
-        String[] args = new String[] {removeRegister};
-        Cursor c = db.query("BookTable", null, "bookName=?",
-                args,null, null, null);
-        if (c.moveToFirst()) { // Nos aseguramos de que existe al menos un registro
-            String book= c.getString(0);
-            String subject = c.getString(1);
-            String details = c.getString(2);
-            info.set(pos,new Library(book, subject, details));
-            adapter.notifyDataSetChanged();
-            welcomeMsg.setText("CAMBIOS");
-            c.close();
+            ContentValues register = new ContentValues();
+            SharedPreferences preferences = getSharedPreferences("UpdateBookDB", Context.MODE_PRIVATE);
+            String book = preferences.getString("bookName","not_data");
+            String subject = preferences.getString("subject", "not_data");
+            String details = preferences.getString("details", "not_data");
+
+            Library item = info.get(positionID); // Obteno el item Library que se modifico
+
+            if( !book.isEmpty() ) {
+                register.put("bookName", book);
+                item.setBookName(book);
+                cantChange++;
+            }
+            if( !subject.isEmpty() ) {
+                register.put("subject", subject);
+                item.setSubject(subject);
+                cantChange++;
+            }
+            if( !details.isEmpty() ) {
+                register.put("details", details);
+                item.setDetails(details);
+                cantChange++;
+            }
+
+            if( cantChange > 0 ) {
+                info.set(positionID, item); // Actualiza el item modificado en la ListView
+                adapter.notifyDataSetChanged(); // Notifica el cambio
+
+                String[] args = new String[] {changedBookID}; // Actualiza la base de datos
+                db.update("BookTable", register, "bookName=?", args);
+            }
+
+            changedBookID = "";
+            itemEditFlag = false;
         }
-        else welcomeMsg.setText("ERROR");
     }
 
     @Override
@@ -210,24 +207,23 @@ public class InfoListActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo menu = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        pos = menu.position;
-        editItem = adapter.getItem(pos);
+        positionID = menu.position;
+        changedBookID = (adapter.getItem(positionID)).getBookName(); // Obtengo el "id" del registro que se va a borrar o editar
         switch (item.getItemId()) {
             case R.id.op_edit: // Abre una activity para editar datos del item de la ListView
+                itemEditFlag = true;
+                welcomeMsg.setText("EDIT" + changedBookID);
                 Intent nextActEdit = new Intent(InfoListActivity.this, EditActivity.class);
-                removeRegister = (adapter.getItem(pos)).getBookName(); // Obtengo el "id" del registro que se va a editar
-                nextActEdit.putExtra("ID", removeRegister); // envio datos a la otra activity con Intent
                 startActivity(nextActEdit);
                 return true;
 
             case R.id.op_delete:
                 // Elimina un item de la ListView. NOTA: automaticamente se elimina un item de List info!!!
-                adapter.remove(adapter.getItem(pos)); // Elimina el item
+                adapter.remove(adapter.getItem(positionID)); // Elimina el item
                 adapter.notifyDataSetChanged(); // Actuliza la ListView
 
                 // Elimina un registro de la base de datos
-                removeRegister = (adapter.getItem(pos)).getBookName(); // Obtengo el "id" del registro que se va a borrar
-                String[] args = new String[] {removeRegister};
+                String[] args = new String[] {changedBookID};
                 db.delete("BookTable", "bookName=?", args); // Elimina el registro
                 return true;
         }

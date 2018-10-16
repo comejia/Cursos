@@ -18,7 +18,7 @@ import clases.BookSQLite;
 public class SplashActivity extends AppCompatActivity {
 
     public ProgressBar progressBar;
-    private final long splash_screen_delay = 3000;  // tiempo que el splash screen se muestra [ms]
+    private final long splash_screen_delay = 1000;  // tiempo que el splash screen se muestra [ms]
 
     public SQLiteDatabase db;
 
@@ -57,8 +57,12 @@ public class SplashActivity extends AppCompatActivity {
             db.insert("BookTable", null, register); // inserta un registro
 
             c.close();
-            db.close(); // Cierra la base de datos
         }
+        /*String args[] = new String[] {"Dispositivos moviles"};
+        ContentValues register = new ContentValues();
+        register.put("details", "Enlace con informacion basada en la cursada");
+        db.update("BookTable", register, "subject=?", args);*/
+
 
         //else {
             //}
@@ -85,4 +89,9 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
+    }
 }
