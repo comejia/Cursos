@@ -62,4 +62,7 @@
     <string name="details_edit">Detalles</string>
 
     <string name="edit_button">Realizar cambios</string>
+
+    <!-- Fragment Image -->
+    <string name="str_photo">Portada del libro</string>
 </resources>

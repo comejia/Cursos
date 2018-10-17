@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Camera;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -90,7 +91,8 @@ public class InfoListActivity extends AppCompatActivity {
                 String detail = ((Library)parent.getItemAtPosition(position)).getDetails();
 
                 Intent nextActDetails = new Intent(InfoListActivity.this, DetailsActivity.class);
-                nextActDetails.putExtra("DETALLES", detail); // envio datos a la otra activity con Intent
+                nextActDetails.putExtra("DETAILS", detail); // envio datos a la otra activity con Intent
+                nextActDetails.putExtra("IMAGE", R.drawable.logo_utn);
                 startActivity(nextActDetails);
             }
         });
