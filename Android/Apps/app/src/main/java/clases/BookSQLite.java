@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class BookSQLite extends SQLiteOpenHelper {
-    private String createTableSQL = "CREATE TABLE BookTable (bookName TEXT, subject TEXT, details TEXT)";
+    private String createTableSQL = "CREATE TABLE BookTable (id INTEGER PRIMARY KEY, bookName TEXT, subject TEXT, details TEXT, imageID INTEGER)";
 
     public BookSQLite(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);

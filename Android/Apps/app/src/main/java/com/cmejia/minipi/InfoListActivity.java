@@ -60,21 +60,16 @@ public class InfoListActivity extends AppCompatActivity {
         Cursor c = db.query("BookTable", null, null, // Pregunto por todos los registros
                 null,null, null, null);
 
-        // Instancio los objetos que se van a mostrar en el ListView a mano
-        /*Library[] info = new Library[] {
-                new Library("Electromagnetismo", "Medios de enlace", "Libro con los fundamentos de Electromagnetismo"),
-                new Library("Ing de Control Moderno", "Sistemas de Control", "Enfoque principal en compensacion de sistemas"),
-                new Library("SGOliver", "Dispositivos moviles", "Enlace con informacion basada en la cursada")
-        };*/
-
         // Instancio los objetos que se van a mostrar en el ListView a partir de la base de datos
         info = new ArrayList<>();
         if (c.moveToFirst()) { // Nos aseguramos de que existe al menos un registro
             do { //Recorremos el cursor hasta que no haya más registros
-                String book= c.getString(0);
-                String subject = c.getString(1);
-                String details = c.getString(2);
-                info.add(new Library(book, subject, details));
+                int id = c.getInt(0);
+                String book= c.getString(1);
+                String subject = c.getString(2);
+                String details = c.getString(3);
+                int imageID = c.getInt(4);
+                info.add(new Library(id, book, subject, details, imageID));
             } while(c.moveToNext());
             c.close();
         }
@@ -89,10 +84,11 @@ public class InfoListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String detail = ((Library)parent.getItemAtPosition(position)).getDetails();
+                int image = ((Library)parent.getItemAtPosition(position)).getImageID();
 
                 Intent nextActDetails = new Intent(InfoListActivity.this, DetailsActivity.class);
                 nextActDetails.putExtra("DETAILS", detail); // envio datos a la otra activity con Intent
-                nextActDetails.putExtra("IMAGE", R.drawable.logo_utn);
+                nextActDetails.putExtra("IMAGE", image);
                 startActivity(nextActDetails);
             }
         });
@@ -214,7 +210,6 @@ public class InfoListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.op_edit: // Abre una activity para editar datos del item de la ListView
                 itemEditFlag = true;
-                welcomeMsg.setText("EDIT" + changedBookID);
                 Intent nextActEdit = new Intent(InfoListActivity.this, EditActivity.class);
                 startActivity(nextActEdit);
                 return true;

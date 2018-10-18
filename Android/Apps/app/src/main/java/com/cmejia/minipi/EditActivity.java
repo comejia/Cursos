@@ -32,6 +32,8 @@ public class EditActivity extends AppCompatActivity {
         details = findViewById(R.id.input_details_edit);
         editButton = findViewById(R.id.edit_button);
 
+
+
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,5 +51,16 @@ public class EditActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences preferences = getSharedPreferences("UpdateBookDB", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("bookName", "");
+        editor.putString("subject", "");
+        editor.putString("details", "");
+        editor.apply();
+    }
 }
 

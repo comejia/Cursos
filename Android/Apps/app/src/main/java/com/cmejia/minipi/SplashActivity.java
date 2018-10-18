@@ -44,17 +44,33 @@ public class SplashActivity extends AppCompatActivity {
             register.put("bookName", "Electromagnetismo");
             register.put("subject", "Medios de enlace");
             register.put("details", "Libro con los fundamentos de Electromagnetismo");
+            register.put("imageID", R.drawable.electromagnetismo);
             db.insert("BookTable", null, register); // inserta un registro
 
             register.put("bookName", "Ing de Control Moderno");
             register.put("subject", "Sistemas de Control");
             register.put("details", "Enfoque principal en compensacion de sistemas");
+            register.put("imageID", R.drawable.control_moderno);
             db.insert("BookTable", null, register); // inserta un registro
 
             register.put("bookName", "SGOliver");
             register.put("subject", "Dispositivos moviles");
             register.put("details", "Enlace con informacion basada en la cursada");
+            register.put("imageID", R.drawable.soliver);
             db.insert("BookTable", null, register); // inserta un registro
+
+            register.put("bookName", "Dispositivos electronicos");
+            register.put("subject", "Dispositivos electronicos");
+            register.put("details", "Teoria sobre fisica de semiconductores. Este libro cubre hasta mosfet");
+            register.put("imageID", R.drawable.dispositivos_electronicos);
+            db.insert("BookTable", null, register); // inserta un registro
+
+            register.put("bookName", "Maquinas electricas");
+            register.put("subject", "Maquinas e Instalaciones electricas");
+            register.put("details", "Este libro cubre la primera parte de la materia");
+            register.put("imageID", R.drawable.maquinas_electricas);
+            db.insert("BookTable", null, register); // inserta un registro
+
 
             c.close();
         }
@@ -64,12 +80,8 @@ public class SplashActivity extends AppCompatActivity {
         db.update("BookTable", register, "subject=?", args);*/
 
 
-        //else {
-            //}
-            //String selection = "username" + " LIKE ?";
-            // Specify arguments in placeholder order.
-            //String[] selectionArgs = { "cesarmejia" };
-            //int delete = db.delete("UserDataTable", "username=?", selectionArgs);
+        //String[] args = { "Ing de Control Moderno", "Electromagnetismo" };
+        //int delete = db.delete("BookTable", "bookName=? OR bookName=?", args);
 
 
         // Se crea la tarea a ejecutar
