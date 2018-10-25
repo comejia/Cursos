@@ -27,7 +27,8 @@
         <activity android:name=".InfoListActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".DetailsActivity" />
-        <activity android:name=".EditActivity"></activity>
+        <activity android:name=".EditActivity" />
+        <activity android:name=".AddItemActivity"></activity>
     </application>
 
 </manifest>

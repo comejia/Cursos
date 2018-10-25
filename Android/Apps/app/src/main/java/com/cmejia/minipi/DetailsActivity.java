@@ -48,5 +48,10 @@ public class DetailsActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
 }
 

@@ -1,7 +1,5 @@
 package clases;
 
-//import android.graphics.drawable.Drawable;
-
 public class Library {
     private int id;
     private String bookName;

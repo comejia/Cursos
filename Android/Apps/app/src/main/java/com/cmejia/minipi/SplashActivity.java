@@ -14,12 +14,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import clases.BookSQLite;
+import clases.ProgressBarAsyncTask;
 
 public class SplashActivity extends AppCompatActivity {
 
     public ProgressBar progressBar;
-    private final long splash_screen_delay = 1000;  // tiempo que el splash screen se muestra [ms]
+    private final int splash_screen_delay = 3000;  // tiempo que el splash screen se muestra [ms]
 
+    public ProgressBarAsyncTask asyncTask;
     public SQLiteDatabase db;
 
     @Override
@@ -31,7 +33,7 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
 
-        progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progress_bar);
 
         final BookSQLite bookdb = new BookSQLite(this, "DBBook.db", null, 1);
         db = bookdb.getWritableDatabase(); // Referencia a userdb para modificacion
@@ -71,18 +73,11 @@ public class SplashActivity extends AppCompatActivity {
             register.put("imageID", R.drawable.maquinas_electricas);
             db.insert("BookTable", null, register); // inserta un registro
 
-
             c.close();
         }
-        /*String args[] = new String[] {"Dispositivos moviles"};
-        ContentValues register = new ContentValues();
-        register.put("details", "Enlace con informacion basada en la cursada");
-        db.update("BookTable", register, "subject=?", args);*/
 
-
-        //String[] args = { "Ing de Control Moderno", "Electromagnetismo" };
-        //int delete = db.delete("BookTable", "bookName=? OR bookName=?", args);
-
+        asyncTask = new ProgressBarAsyncTask(progressBar);
+        asyncTask.execute(splash_screen_delay);
 
         // Se crea la tarea a ejecutar
         TimerTask task = new TimerTask() {

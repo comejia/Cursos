@@ -1,14 +1,19 @@
 package fragments;
 
 
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -73,8 +78,21 @@ public class DetailsFragment extends Fragment {
         details.setText(text);
     }
 
-}
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String back = preferences.getString("pref_background", "none");
+        String color = preferences.getString("pref_text_color","none");
+        String size = preferences.getString("pref_text_size", "none");
 
+        //FrameLayout layout = getView().findViewById(R.id.frame_layout);
+        //layout.setBackgroundColor(Color.parseColor(color));
+        details.setTextSize(Integer.valueOf(size));
+        details.setTextColor(Color.parseColor(color));
+
+    }
+}
 //private void copyDataBase() throws IOException {
   //  InputStream myInput = myContext.getAssets().open(DB_NAME);
     //String outFileName = DB_PATH + DB_NAME;

@@ -4,9 +4,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Camera;
+import android.graphics.Color;
+import android.preference.PreferenceManager;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -20,6 +25,8 @@ import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +39,7 @@ public class InfoListActivity extends AppCompatActivity {
     public ListView myListView;
     public TextView welcomeMsg;
     public Toolbar toolbar;
+    public FloatingActionButton floatButton;
 
     public SQLiteDatabase db;
     public ListViewAdapter adapter;
@@ -40,6 +48,11 @@ public class InfoListActivity extends AppCompatActivity {
     public int positionID;
     public boolean itemEditFlag = false;
     public String changedBookID;
+    public boolean addItemFlag = false;
+
+    public TextView text1;
+    public TextView text2;
+    public boolean settingFlag = false;
 
 
     @Override
@@ -47,8 +60,14 @@ public class InfoListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_list);
 
+        text1 = findViewById(R.id.book_name);
+        text2 = findViewById(R.id.subject);
+
         myListView = findViewById(R.id.info_list);
         toolbar = findViewById(R.id.toolbar);
+        floatButton = findViewById(R.id.float_button);
+
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         setSupportActionBar(toolbar); // Indica que toolbar va a ser la ActionBar de la activity
 
@@ -74,10 +93,6 @@ public class InfoListActivity extends AppCompatActivity {
             c.close();
         }
         setupListViewAdapter(info); // Creo el adapter a traves del metodo
-        // Creo el adapter personalizado
-        //ListViewAdapter myAdapter = new ListViewAdapter(this, info);
-        //myListView.setAdapter(myAdapter); // Enlaza el ListView al adapter
-        //adapter = myAdapter;
 
         //myListView.setOnItemSelectedListener(); DIFERENCIA??!!!
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -93,6 +108,15 @@ public class InfoListActivity extends AppCompatActivity {
             }
         });
 
+        floatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addItemFlag = true;
+                Intent nextActAddItem = new Intent(InfoListActivity.this, AddItemActivity.class);
+                startActivity(nextActAddItem);
+            }
+        });
+
         // TESTING SharedPreferences
         welcomeMsg = findViewById(R.id.welcome_msg);
         SharedPreferences preferences = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
@@ -102,6 +126,7 @@ public class InfoListActivity extends AppCompatActivity {
             welcomeMsg.setText(buffer);
         }
     }
+
     private void setupListViewAdapter(List<Library> list) {
         this.adapter = new ListViewAdapter(this, list);
         myListView.setAdapter(adapter); // Enlaza el ListView al adapter
@@ -110,6 +135,23 @@ public class InfoListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+//        if(settingFlag) {
+
+            ConstraintLayout constraintLayout = findViewById(R.id.info_list_act);
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            String color = preferences.getString("pref_text_color","none");
+            String size = preferences.getString("pref_text_size", "none");
+            String back = preferences.getString("pref_background", "none");
+
+            adapter.setTextColor(Color.parseColor(color));
+            adapter.setTextSize(Integer.valueOf(size));
+            constraintLayout.setBackgroundColor(Color.parseColor(back));
+
+            adapter.notifyDataSetChanged();
+            settingFlag = false;
+//        }
+
     }
 
     @Override
@@ -154,6 +196,28 @@ public class InfoListActivity extends AppCompatActivity {
             changedBookID = "";
             itemEditFlag = false;
         }
+
+        if(addItemFlag) {
+            SharedPreferences preferences = getSharedPreferences("UpdateBookDB", Context.MODE_PRIVATE);
+            String book = preferences.getString("bookName","not_data");
+            String subject = preferences.getString("subject", "not_data");
+            String details = preferences.getString("details", "not_data");
+            int image = preferences.getInt("imageID", 0);
+            if (image != 0) {
+                ContentValues register = new ContentValues();
+                register.put("bookName", book);
+                register.put("subject", subject);
+                register.put("details", details);
+                register.put("imageID", image);
+
+                Library item = new Library(info.size() + 1, book, subject, details, image);
+                info.add(item);
+                adapter.notifyDataSetChanged();
+
+                db.insert("BookTable", null, register); // inserta un registro
+            }
+            addItemFlag = false;
+        }
     }
 
     @Override
@@ -172,10 +236,11 @@ public class InfoListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { //Metodo para realizar una accion al tocar algun icono
         switch (item.getItemId()) {
-            case R.id.action_add:
+            //case R.id.action_add:
                 // agregar activity de Anadir item
-                break;
+              //  break;
             case R.id.action_settings:
+                settingFlag = true;
                 Intent nextActSettings = new Intent(InfoListActivity.this, SettingsActivity.class);
                 startActivity(nextActSettings);
                 break;
