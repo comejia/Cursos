@@ -6,7 +6,7 @@
 
 const int pin_dht11 = 2;
 
-DHT dht(pin_dht11, DHT11);
+DHT mi_dht(pin_dht11, DHT11);
 
 void setup() {
   Serial.begin(115200);
@@ -14,17 +14,17 @@ void setup() {
 
   dht.begin();
 
-  delay(2000);
+  delay(2000); // Delay inicial para que termine de configurar el dht
 }
 
 void loop() {
   // Reading temperature or humidity takes about 250 milliseconds!
   // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
-  float humedad = dht.readHumidity();
+  float humedad = mi_dht.readHumidity();
   // Read temperature as Celsius (the default)
-  float temperatura = dht.readTemperature();
+  float temperatura = mi_dht.readTemperature();
   // Read temperature as Fahrenheit (isFahrenheit = true)
-  float f = dht.readTemperature(true);
+  float f = mi_dht.readTemperature(true);
 
   // Check if any reads failed and exit early (to try again).
   if (isnan(humedad) || isnan(temperatura) || isnan(f)) {
