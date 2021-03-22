@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volumenes
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts: # se indica que directorios se van a montar DENTRO de los contenedores
+    - mountPath: /home
+      name: home
+    - mountPath: /git
+      name: git-repo
+      readOnly: true
+    - mountPath: /temp
+      name: temp
+  volumes: # para indicar como mapear fisicamente los volumeMounts
+  - name: home
+    hostPath: # indica que el volumen va a estar asociado a un dir del sistema de ficheros
+      path: /home/cmejia/kubevol
+  - name: git-repo
+    gitRepo: # indica que es un repositorio git. Descarga el repo desde la url
+      repository: https://github.com/ApasoftTraining/cursoKubernetes.git
+  - name: temp
+    emptyDir: {} # para directorios temporales. Finaliza con el pod
