@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tomcat
+  labels:
+    estado: "desarrollo"
+    propietario: "Cesar"
+spec:
+  containers:
+   - name: tomcat
+     image: tomcat

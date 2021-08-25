@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tomcat-nginx
+  labels:
+    app: tomcat-nginx
+spec:
+  containers:
+   - name: tomcat     
+     image: tomcat
+   - name: nginx
+     image: nginx
+  restartPolicy: OnFailure
