@@ -9,7 +9,7 @@ data:
   alertmanager.yml: |-
     global:
       resolve_timeout: 5m
-      slack_api_url: 'https://hooks.slack.com/services/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'
+      slack_api_url: 'https://hooks.slack.com/services/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'
   
     route:
       group_by: ['alertname', 'priority']
