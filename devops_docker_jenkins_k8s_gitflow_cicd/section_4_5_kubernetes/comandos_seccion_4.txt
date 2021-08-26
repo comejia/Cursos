@@ -1,0 +1,49 @@
+Verificar si la cp soporta vitualizacion
+
+grep -E --color 'vmx|svm' /proc/cpuinfo
+
+Descargar kubectl y hacerlo ejecutable
+
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.20.0/bin/linux/amd64/kubectl && chmod +x minikube kubectl
+
+Crear el directorio para kubectl
+
+sudo mv ./kubectl /usr/local/bin/kubectl
+
+Verificar version
+
+kubectl version --client
+
+Descargar minnukube y hacerlo ejecutable
+
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64   && chmod +x minikube
+
+Crear el directorio para minikube
+
+sudo mkdir -p /usr/local/bin/
+
+Lanzar el ejecutable
+
+sudo install minikube /usr/local/bin/
+
+Comandos para operar minikube
+
+ minikube start 
+
+ minikube status
+
+ minikube stop
+
+ minikube start
+
+Lanzar el dashboard grafico
+
+minikube dashboard
+
+Eliminar el cluster de minikube
+
+minikube delete
+
+Inicar un nuevo cluster de minikube usando el controlador hypervisor de virtualbox
+
+minikube start --driver=virtualbox
