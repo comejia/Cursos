@@ -1,0 +1,8 @@
+Ha petición de algunos alumnos, incorporamos el proyecto usado en la presentación.
+
+No es un ejercicio ni, mucho menos, una implementación completa.
+
+Tan solo es una muestra para facilitar seguir la clase pudiendo navegar vosotros mismos por el código.
+
+Observad como la implementación de VendedorEmpresasImpl permite implementar la "abstraction API" (VendedorOnlineEmpresas), 
+usando la "implementation API" (TiendaImpl)

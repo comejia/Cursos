@@ -1,0 +1,8 @@
+La solucion propuesta (ojo, es una propuesta! no significa que sea la unica solucion o la mejor)
+consiste en crear una nueva clase ExportadorCSV.
+
+Esta clase no conoce nada del proceso de buscar peliculas, solo de como exportar a un determinado
+formato (CSV) una lista de peliculas. Con este cambio, la clase Recomendador tambien queda con una 
+unica responsabilidad: conocer como buscar peliculas, sin saber nada de los distintos formatos.
+
+El test tambien esta adaptado a los cambios del codigo
