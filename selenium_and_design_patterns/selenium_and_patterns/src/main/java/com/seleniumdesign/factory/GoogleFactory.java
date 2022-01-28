@@ -8,6 +8,8 @@ import java.util.function.Function;
 
 public class GoogleFactory {
 
+    // Factory pattern implementation with lambda
+    // Use this when you need to give some param
     private static final Function<WebDriver, GooglePage> ENG = GoogleEnglish::new;
     private static final Function<WebDriver, GooglePage> FR = GoogleFrench::new;
     private static final Function<WebDriver, GooglePage> SA = GoogleArabic::new;
