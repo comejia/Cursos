@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AmazonSearchPage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     @FindBy(id = "twotabsearchtextbox")
     private WebElement searchBox;
